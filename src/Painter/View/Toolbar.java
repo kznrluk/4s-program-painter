@@ -18,7 +18,7 @@ class Toolbar {
 
     private MainCanvas cv;
     private Button reset;
-    private ChoiceBox modeSelector;
+    private ChoiceBox<String> modeSelector;
     private ColorPicker currentColor;
 
     /**
@@ -35,8 +35,8 @@ class Toolbar {
         this.currentColor = new ColorPicker(DEFAULT_PEN_COLOR);
         this.currentColor.setMaxWidth(BUTTON_WIDTH);
 
-        this.modeSelector = new ChoiceBox();
-        //noinspection unchecked
+        this.modeSelector= new ChoiceBox<>();
+
         this.modeSelector.setItems(FXCollections.observableArrayList(
                 "NormalLine", "CircleLine", "課題2", "課題3", "課題5", "課題6"
         ));
