@@ -38,7 +38,6 @@ public class MainWindow extends Application {
         mainCanvas.getCanvas().addEventHandler(MouseEvent.MOUSE_EXITED, event -> scene.setCursor(Cursor.DEFAULT));
 
         stage.setTitle("ネットワークプログラム応用演習 レポート課題 - Painter");
-        stage.getIcons().add(new Image(MainWindow.class.getResourceAsStream( "../Resource/icon.png" )));
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
