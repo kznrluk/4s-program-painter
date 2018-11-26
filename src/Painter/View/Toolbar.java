@@ -1,6 +1,7 @@
 package Painter.View;
 
 import Painter.Controller.PenSelector;
+import Painter.Controller.SaveCanvasAsFile;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -18,6 +19,7 @@ class Toolbar {
 
     private MainCanvas cv;
     private Button reset;
+    private Button save;
     private ChoiceBox<String> modeSelector;
     private ColorPicker currentColor;
 
@@ -42,6 +44,9 @@ class Toolbar {
         ));
         this.modeSelector.setMinWidth(BUTTON_WIDTH);
 
+        this.save = new Button("保存");
+        this.save.setMinWidth(BUTTON_WIDTH);
+
         // this.countInfo = new Text(10, 50, "This is a test");
 
         initEvent();
@@ -55,7 +60,7 @@ class Toolbar {
     VBox getPane() {
         VBox pane = new VBox();
         pane.setSpacing(VERTICAL_SPACING);
-        pane.getChildren().addAll(this.reset, this.modeSelector, currentColor);
+        pane.getChildren().addAll(this.reset, this.modeSelector, currentColor, this.save);
 
         return pane;
     }
@@ -73,5 +78,18 @@ class Toolbar {
         this.reset.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> cv.reset());
 
         this.currentColor.setOnAction((ActionEvent t) -> cv.setColor(this.currentColor.getValue()));
+
+        this.save.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            SaveAsPopup popUp = new SaveAsPopup();
+            boolean result = popUp.open();
+            if(result){
+                try {
+                    String filePath = SaveCanvasAsFile.output(this.cv.getCanvas(), popUp.getFileName());
+                    System.out.println("保存が完了しました: " + filePath);
+                } catch (Exception e) {
+                    System.out.println("正常に保存できませんでした。");
+                }
+            }
+        });
     }
 }
