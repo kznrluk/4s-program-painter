@@ -22,6 +22,8 @@ class Toolbar {
     private Button save;
     private ChoiceBox<String> modeSelector;
     private ColorPicker currentColor;
+    private Button undo;
+    private Button redo;
 
     /**
      * キャンバスを登録し、各種機能の初期化を行う。
@@ -47,6 +49,11 @@ class Toolbar {
         this.save = new Button("保存");
         this.save.setMinWidth(BUTTON_WIDTH);
 
+        this.undo = new Button("Undo");
+        this.undo.setMinWidth(BUTTON_WIDTH);
+        this.redo = new Button("Redo");
+        this.redo.setMinWidth(BUTTON_WIDTH);
+
         // this.countInfo = new Text(10, 50, "This is a test");
 
         initEvent();
@@ -60,7 +67,7 @@ class Toolbar {
     VBox getPane() {
         VBox pane = new VBox();
         pane.setSpacing(VERTICAL_SPACING);
-        pane.getChildren().addAll(this.reset, this.modeSelector, currentColor, this.save);
+        pane.getChildren().addAll(this.reset, this.modeSelector, currentColor, this.save, this.undo, this.redo);
 
         return pane;
     }
@@ -91,5 +98,8 @@ class Toolbar {
                 }
             }
         });
+
+        this.undo.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> cv.undo());
+        this.redo.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> cv.redo());
     }
 }

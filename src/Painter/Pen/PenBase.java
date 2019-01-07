@@ -14,6 +14,7 @@ public abstract class PenBase {
 
     abstract public void mouseDragged(MouseEvent event);
     abstract public void mousePressed(MouseEvent event);
+    public void mouseReleased(MouseEvent event){}
 
     public void setCanvas(Canvas canvas) {
         this.graphicsContext = canvas.getGraphicsContext2D();
